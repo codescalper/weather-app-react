@@ -1,0 +1,5 @@
+https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+7508fdcdd46fd4e4050a5e8cbbdb3722 -> Api key
+
+https://api.openweathermap.org/data/2.5/weather?q=thane&appid=7508fdcdd46fd4e4050a5e8cbbdb3722
