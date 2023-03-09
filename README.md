@@ -9,7 +9,7 @@
 <ol>
   <li>Clone this repository: <code>git clone https://github.com/codescalper/weather-app-react.git</code></li>
   <li>Install dependencies: <code>npm install</code></li>
-  <li>Get an API key from OpenWeatherMap and replace it in the URL in the <code>getWeatherInfo</code> function in <code>Temp.js</code></li>
+  <li>Get an API key from OpenWeatherMap and replace it in the URL in the <code>getWeatherInfo</code> function in <code>weather.js</code></li>
   <li>Start the app: <code>npm start</code></li>
 </ol>
 <!-- Add a list of features in your app -->
