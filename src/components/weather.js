@@ -160,4 +160,3 @@ const Weather = () => {
 };
 
 export default Weather;
-S
