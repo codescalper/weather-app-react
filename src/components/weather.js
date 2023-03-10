@@ -7,6 +7,7 @@ import "./style.css";
 const Weather = () => {
   const [searchValue, setSearchValue] = useState("Mumbai");
   const [tempInfo, setTempInfo] = useState({});
+  const [timeStr, setTimeStr] = useState("");
 
   async function getWeatherInfo() {
     try {
@@ -20,6 +21,11 @@ const Weather = () => {
       const { speed } = data.wind;
       const { country, sunset } = data.sys;
 
+      if (sunset) {
+        let date = new Date(sunset * 1000);
+        setTimeStr(`${date.getHours()}:${date.getMinutes()}`);
+      }
+
       const myNewWeatherInfo = {
         temp,
         humidity,
@@ -27,18 +33,42 @@ const Weather = () => {
         weathermood,
         name,
         speed,
-        country
+        country,
+        sunset
       };
       setTempInfo(myNewWeatherInfo);
-      console.log(temp);
     } catch (error) {
       console.log(error);
     }
   }
+  const [weatherState, setWeatheState] = React.useState("");
+  useEffect(() => {
+    if (tempInfo.weathermood) {
+      switch (tempInfo.weathermood) {
+        case "Clouds":
+          setWeatheState("wi-day-cloudy");
+          break;
+        case "Haze":
+          setWeatheState("wi-fog");
+          break;
+        case "Clear":
+          setWeatheState("wi-day-sunny");
+          break;
+        case "Mist":
+          setWeatheState("wi-dust");
+          break;
+
+        default:
+          setWeatheState("wi-day-sunny");
+          break;
+      }
+    }
+  }, [tempInfo.weathermood]);
 
   useEffect(() => {
     getWeatherInfo();
   }, []);
+
   return (
     <>
       <div className="wrap">
@@ -59,15 +89,17 @@ const Weather = () => {
       </div>
       <div className="widget">
         <div className="weatherIcon">
-          <i className={"wi wi-day-sunny"}></i>
+          <i className={`wi ${weatherState}`}></i>
         </div>
         <div className="weatherInfo">
           <div className="temperature">
-            <p>32.2&deg;</p>
+            <p>{tempInfo.temp}&deg;</p>
           </div>
           <div className="description">
-            <div className="weatherCondition">Sunny</div>
-            <div className="place">Mumbai,india</div>
+            <div className="weatherCondition">{tempInfo.weathermood}</div>
+            <div className="place">
+              {tempInfo.name}, {tempInfo.country}
+            </div>
           </div>
         </div>
 
@@ -80,6 +112,7 @@ const Weather = () => {
                 <i className={"wi wi-sunset"}></i>
               </p>
               <p className="extra-info-leftside">
+                {timeStr} PM
                 <br />
                 Sunset
               </p>
@@ -90,6 +123,7 @@ const Weather = () => {
                 <i className={"wi wi-humidity"}></i>
               </p>
               <p className="extra-info-leftside">
+                {tempInfo.humidity}
                 <br />
                 Humidity
               </p>
@@ -102,6 +136,7 @@ const Weather = () => {
                 <i className={"wi wi-rain"}></i>
               </p>
               <p className="extra-info-leftside">
+                {tempInfo.pressure}
                 <br />
                 Pressure
               </p>
@@ -112,6 +147,7 @@ const Weather = () => {
                 <i className={"wi wi-strong-wind"}></i>
               </p>
               <p className="extra-info-leftside">
+                {tempInfo.speed}
                 <br />
                 Speed
               </p>
@@ -124,3 +160,4 @@ const Weather = () => {
 };
 
 export default Weather;
+S
