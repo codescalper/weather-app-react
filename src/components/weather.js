@@ -68,6 +68,12 @@ const Weather = () => {
   useEffect(() => {
     getWeatherInfo();
   }, []);
+  
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      getWeatherInfo();
+    }
+  };
 
   return (
     <>
@@ -80,6 +86,7 @@ const Weather = () => {
             className="searchName"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
 
           <button className="searchButton" onClick={getWeatherInfo}>
@@ -91,7 +98,7 @@ const Weather = () => {
         <div className="weatherIcon">
           <i className={`wi ${weatherState}`}></i>
         </div>
-        <div className="weatherInfo">
+        <div className="weatherInfo"> 
           <div className="temperature">
             <p>{tempInfo.temp}&deg;</p>
           </div>
