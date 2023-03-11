@@ -8,8 +8,10 @@ const Weather = () => {
   const [searchValue, setSearchValue] = useState("Mumbai");
   const [tempInfo, setTempInfo] = useState({});
   const [timeStr, setTimeStr] = useState("");
+  const [searchClicked, setSearchClicked] = useState(false);
 
   async function getWeatherInfo() {
+    setSearchClicked(true);
     try {
       let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=7508fdcdd46fd4e4050a5e8cbbdb3722`;
       let response = await fetch(url);
@@ -74,6 +76,13 @@ const Weather = () => {
       getWeatherInfo();
     }
   };
+  useEffect(() => {
+    if (searchClicked) {
+      setTimeout(() => {
+        setSearchClicked(false);
+      }, 1000);
+    }
+  }, [searchClicked]);
 
   return (
     <>
@@ -83,7 +92,7 @@ const Weather = () => {
             type="search"
             placeholder="Search"
             autoFocus
-            className="searchName"
+            className={`searchName ${searchClicked ? "glow" : ""}`}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             onKeyDown={handleKeyDown}
