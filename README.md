@@ -3,7 +3,8 @@
 <!-- Add a brief description of your project -->
 <p>This is a simple weather app built using React that displays current weather information for a location.</p>
 <!-- Add a screenshot or image of your app -->
-![Screenshot of eWeather App](https://cdn.discordapp.com/attachments/1076035070135119912/1084080294077923438/image.png)
+<img src="https://cdn.discordapp.com/attachments/1076035070135119912/1084080294077923438/image.png" alt="Weather APi Mayank Singh">
+
 
 <!-- Add instructions on how to run the app -->
 <h2>How to run the app</h2>
